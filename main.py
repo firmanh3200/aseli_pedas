@@ -13,6 +13,9 @@ from fasthtml.common import (
     B, Button, Input, Select, Option, Label, Table, Thead, Tbody, Tr, Th, Td,
     Canvas, Script, Link, Meta, Title, A, NotStr,
 )
+
+app = FastHTML()
+
 from starlette.requests import Request
 from starlette.responses import Response
 
