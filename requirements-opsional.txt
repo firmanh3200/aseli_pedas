@@ -1,0 +1,46 @@
+# ============================================================
+#  STATPRO - MODUL OPSIONAL (PEMBACA FORMAT TAMBAHAN)
+# ============================================================
+# Aplikasi tetap berjalan normal TANPA paket-paket di bawah ini.
+# Yang dimatikan hanya format file terkait - bila format itu
+# dipakai, aplikasi menampilkan pesan ramah berisi perintah pip.
+#
+# Pasang HANYA bila membutuhkan format tersebut:
+#     pip install -r requirements-opsional.txt
+#
+# ----------------------------------------------------------------
+# CATATAN PENTING AGAR INSTALASI TIDAK GAGAL:
+#
+# 1) pyreadstat versi terbaru TIDAK menyediakan wheel untuk Python
+#    3.10 ke bawah. Tanpa wheel, pip mencoba kompilasi dari kode
+#    sumber dan gagal bila MSVC Build Tools tidak terpasang.
+#    Solusi:
+#      - Python 3.11/3.12+ : pyreadstat terbaru terpasang dari wheel.
+#      - Python 3.10       : pakai  pip install pyreadstat==1.2.0
+#                            (versi ini punya wheel untuk 3.10).
+#      - Cara aman universal (berhenti rapi, tanpa compiler):
+#            pip install --only-binary=:all: pyreadstat
+#        Bila wheel tidak tersedia, format .sav tinggal nonaktif.
+#
+# 2) access-parser versi TERAKHIR yang ada di PyPI hanyalah 0.0.6.
+#    JANGAN PERNAH menulis "access-parser>=1.1.2" - versi itu tidak
+#    pernah ada dan pip pasti error:
+#      ERROR: Could not find a version that satisfies the
+#             requirement access-parser>=1.1.2
+# ----------------------------------------------------------------
+
+# --- Excel .xls lama & DBF (murni Python, aman di semua versi) ---
+xlrd>=2.0.1
+dbfread>=2.0.7
+
+# --- Parquet .parquet (wheel tersedia luas) ---
+pyarrow>=14.0.0
+
+# --- SPSS .sav / .zsav (lihat catatan no. 1 di atas) ---
+pyreadstat>=1.2.0
+
+# --- Access .mdb / .accdb (murni Python; versi terakhir 0.0.6) ---
+access-parser>=0.0.6
+
+# --- Analisis faktor (dipakai analisis "Analisis Faktor") ---
+factor-analyzer>=0.5.0
