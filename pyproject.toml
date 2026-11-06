@@ -1,0 +1,17 @@
+[project]
+name = "aseli-pedas"
+version = "0.1.0"
+description = "Aplikasi Edukasi Literasi dan Pengolahan Data Statistik"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "python-fasthtml>=0.12.0",
+    "uvicorn[standard]>=0.30",
+]
+
+[tool.vercel]
+entrypoint = "app:app"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
