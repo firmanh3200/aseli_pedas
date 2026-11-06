@@ -1,19 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-AseliPedas - Aplikasi Pengolah Statistik Dasar (FastHTML Edition)
-================================================================
-Konversi dari aplikasi Streamlit asli dengan fungsi yang sama:
-  - Unggah file multi-format: CSV, XLS, XLSX, DBF, JSON, TXT, TSV, Parquet
-  - Pratinjau data (10 baris pertama)
-  - Statistik dasar 13 metrik untuk semua kolom numerik
-  - Detail per kolom + histogram distribusi interaktif
-  - Statistik kolom kategorik
-  - Unduh hasil statistik sebagai CSV
-
-Cara menjalankan:
-  python app.py            -> http://0.0.0.0:3000
-  PORT=8080 python app.py  -> port kustom
-"""
 import os
 import io
 import csv
