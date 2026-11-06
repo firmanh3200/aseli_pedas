@@ -8,18 +8,34 @@ import tempfile
 
 import numpy as np
 import pandas as pd
+from starlette.requests import Request
+from starlette.responses import Response
+
 from fasthtml.common import (
-    fast_app, Div, Section, Header, Footer, Main, Form, H1, H2, H3, P, Span,
+    fast_app, FastHTML,
+    Div, Section, Header, Footer, Main, Form, H1, H2, H3, P, Span,
     B, Button, Input, Select, Option, Label, Table, Thead, Tbody, Tr, Th, Td,
     Canvas, Script, Link, Meta, Title, A, NotStr,
 )
 
-app = FastHTML()
-
-from starlette.requests import Request
-from starlette.responses import Response
-
 from narasi import narasi_dasar_kolom, narasi_dasar_ringkasan, narasi_dasar_kategorik
+
+app, rt = fast_app(pico=False, hdrs=(
+        Meta(charset="utf-8"),
+        Meta(name="viewport", content="width=device-width, initial-scale=1"),
+        Meta(name="description", content=(
+            "Aplikasi pengolah statistik dasar: unggah data CSV, Excel, DBF, JSON, TXT, TSV, "
+            "atau Parquet dan dapatkan ringkasan statistik lengkap secara instan."
+        )),
+        Link(rel="icon", type="image/svg+xml", href=FAVICON),
+        Link(rel="preconnect", href="https://fonts.googleapis.com"),
+        Link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin="anonymous"),
+        Link(rel="stylesheet", href=FONTS_URL),
+        Link(rel="stylesheet", href="/app.css?v=20261030a"),
+        Script(src=CHARTJS_SRC),
+        Script(src="/js/chart.js"),
+    ),
+)
 
 try:
     from dbfread import DBF
@@ -673,35 +689,6 @@ def session_gone():
 # ==========================================
 # ROUTES
 # ==========================================
-try:
-    app, rt = fast_app(pico=False, hdrs=(
-        Meta(charset="utf-8"),
-        Meta(name="viewport", content="width=device-width, initial-scale=1"),
-        Meta(name="description", content=(
-            "Aplikasi pengolah statistik dasar: unggah data CSV, Excel, DBF, JSON, TXT, TSV, "
-            "atau Parquet dan dapatkan ringkasan statistik lengkap secara instan."
-        )),
-        Link(rel="icon", type="image/svg+xml", href=FAVICON),
-        Link(rel="preconnect", href="https://fonts.googleapis.com"),
-        Link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin="anonymous"),
-        Link(rel="stylesheet", href=FONTS_URL),
-        Link(rel="stylesheet", href="/app.css?v=20261030a"),
-        Script(src=CHARTJS_SRC),
-        Script(src="/js/chart.js"),
-    ))
-except TypeError:
-    # Fallback untuk versi fasthtml tanpa parameter pico
-    app, rt = fast_app(default_hdrs=False, hdrs=(
-        Meta(charset="utf-8"),
-        Meta(name="viewport", content="width=device-width, initial-scale=1"),
-        Link(rel="icon", type="image/svg+xml", href=FAVICON),
-        Link(rel="stylesheet", href=FONTS_URL),
-        Link(rel="stylesheet", href="/app.css?v=20261030a"),
-        Script(src="https://unpkg.com/htmx.org@2.0.4"),
-        Script(src=CHARTJS_SRC),
-        Script(src="/js/chart.js"),
-    ))
-
 
 @rt("/")
 def get():
